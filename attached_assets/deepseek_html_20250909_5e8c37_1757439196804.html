@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Hassan Kazmouhi – Technicien en développement informatique. Programmation, automatisation, analyse de données, et modélisation statistique." />
+  <title>Hassan Kazmouhi - Portfolio</title>
+
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --secondary: #4f46e5;
+      --dark: #1f2937;
+      --light: #f9fafb;
+      --gray: #6b7280;
+      --gray-light: #e5e7eb;
+      --success: #1dbf73; /* Fiverr green for hovers */
+      --radius: 12px;
+      --shadow: 0 10px 30px rgba(0,0,0,.08);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Poppins', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      color: var(--dark);
+      background-color: var(--light);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+    /* Header */
+    header {
+      background-color: rgba(255,255,255,.95);
+      backdrop-filter: saturate(120%) blur(6px);
+      box-shadow: 0 2px 12px rgba(0,0,0,.08);
+      position: fixed; inset: 0 0 auto 0; z-index: 1000;
+    }
+    nav { display: flex; align-items: center; justify-content: space-between; padding: 16px 0; }
+    .logo { font-size: 1.25rem; font-weight: 700; color: var(--primary); letter-spacing: .3px; }
+
+    .nav-links { display: flex; list-style: none; gap: 28px; }
+    .nav-links a { text-decoration: none; color: var(--dark); font-weight: 500; transition: color .25s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--primary); }
+
+    .admin-btn, .menu-btn {
+      background-color: var(--primary); color: #fff; border: 0; padding: 10px 14px; border-radius: 8px;
+      cursor: pointer; font-weight: 600; transition: background-color .25s, transform .15s; box-shadow: 0 6px 14px rgba(37,99,235,.2);
+    }
+    .admin-btn:hover, .menu-btn:hover { background-color: var(--primary-dark); }
+    .menu-btn { display: none; }
+
+    main { padding-top: 84px; }
+    section { padding: 96px 0; scroll-margin-top: 96px; }
+
+    /* Hero */
+    .hero { min-height: 70vh; display: grid; place-items: center; background: linear-gradient(135deg,#f0f5ff 0%, #fff 60%);} 
+    .hero h1 { font-size: clamp(2rem, 4vw, 3.25rem); margin-bottom: 12px; color: var(--dark); }
+    .hero h2 { font-size: clamp(1.1rem, 2.2vw, 1.6rem); color: var(--primary); margin-bottom: 16px; }
+    .hero p { font-size: 1.05rem; color: var(--gray); max-width: 800px; }
+    .btn { display: inline-block; background-color: var(--primary); color: #fff; padding: 12px 24px; border-radius: 10px;
+           text-decoration: none; font-weight: 600; transition: transform .15s, box-shadow .25s, background-color .25s; }
+    .btn:hover { background-color: var(--primary-dark); transform: translateY(-2px); box-shadow: 0 12px 24px rgba(0,0,0,.12); }
+
+    /* Section headings */
+    .section-title { text-align: center; margin-bottom: 56px; }
+    .section-title h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); margin-bottom: 10px; }
+    .section-title p { color: var(--gray); max-width: 720px; margin-inline: auto; }
+
+    /* About */
+    .about-content { display: grid; grid-template-columns: 1.4fr .9fr; gap: 48px; align-items: center; }
+    .about-image img { width: 100%; border-radius: var(--radius); box-shadow: var(--shadow); display: block; }
+    .personal-info p { margin: 6px 0; }
+
+    /* Skills */
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 24px; }
+    .skill-card { background: #fff; padding: 26px; border-radius: var(--radius); box-shadow: var(--shadow); transition: transform .2s, box-shadow .25s; }
+    .skill-card:hover { transform: translateY(-6px); box-shadow: 0 16px 36px rgba(0,0,0,.12); }
+    .skill-card i { font-size: 2rem; color: var(--primary); margin-bottom: 14px; }
+
+    /* Timeline */
+    .timeline { position: relative; max-width: 900px; margin: 0 auto; }
+    .timeline::after { content:""; position: absolute; top: 0; bottom: 0; left: 50%; width: 4px; background: var(--gray-light); transform: translateX(-50%); border-radius: 2px; }
+    .timeline-item { position: relative; width: 50%; padding: 0 28px 26px; }
+    .timeline-item:nth-child(odd) { left: 0; }
+    .timeline-item:nth-child(even) { left: 50%; }
+    .timeline-content { background: #fff; border-radius: var(--radius); box-shadow: var(--shadow); padding: 18px 20px; }
+    .timeline-date { font-weight: 700; color: var(--primary); margin-bottom: 6px; }
+
+    /* Contact */
+    .contact-content { display: grid; grid-template-columns: 1fr 1.3fr; gap: 40px; }
+    .contact-info p { margin-bottom: 8px; }
+
+    /* Social icons – unified sizing */
+    .social-links { display: flex; gap: 12px; margin-top: 12px; }
+    .social-links .icon { width: 40px; height: 40px; display: inline-flex; align-items: center; justify-content: center; color: #333;
+                          border: 1px solid var(--gray-light); background: #fff; border-radius: 10px; transition: transform .15s, color .25s, border-color .25s; }
+    .social-links .icon:hover { transform: translateY(-2px); color: var(--success); border-color: var(--success); }
+    .social-links .icon i { font-size: 22px; line-height: 1; }
+    .social-links .icon svg { width: 22px; height: 22px; display: block; }
+
+    .contact-form .form-group { margin-bottom: 16px; }
+    .form-control { width: 100%; padding: 14px 12px; border: 1px solid var(--gray-light); border-radius: 10px; font-family: inherit; background: #fff; }
+    .form-control:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(37,99,235,.1); }
+    textarea.form-control { min-height: 140px; resize: vertical; }
+
+    /* Footer */
+    footer { background: var(--dark); color: #fff; padding: 54px 0 22px; }
+    .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 28px; margin-bottom: 24px; }
+    .footer-content a { color: #c7d2fe; text-decoration: none; }
+    .footer-content a:hover { text-decoration: underline; }
+    .footer-bottom { text-align: center; padding-top: 18px; border-top: 1px solid rgba(255,255,255,.14); font-size: .95rem; }
+
+    /* Animations */
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+    .animate { opacity: 0; transform: translateY(14px); transition: opacity .5s, transform .5s; }
+    .animate.animated { opacity: 1; transform: translateY(0); }
+
+    /* Responsive */
+    @media (max-width: 992px) {
+      .about-content, .contact-content { grid-template-columns: 1fr; }
+      .timeline::after { left: 24px; transform: none; }
+      .timeline-item { width: 100%; left: 0 !important; padding-left: 56px; }
+    }
+    @media (max-width: 820px) {
+      .nav-links { display: none; }
+      .menu-btn { display: inline-flex; align-items: center; gap: 8px; margin-right: 8px; }
+      nav { gap: 10px; }
+      .nav-drawer { position: fixed; inset: 64px 0 auto 0; background:#fff; box-shadow: 0 12px 30px rgba(0,0,0,.12); display: none; }
+      .nav-drawer.open { display: block; }
+      .nav-drawer ul { list-style: none; padding: 14px 18px 18px; }
+      .nav-drawer a { display:block; padding: 12px; color: var(--dark); text-decoration:none; border-radius: 8px; }
+      .nav-drawer a:hover { background: var(--gray-light); }
+    }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .btn, .social-links .icon { transition: none; }
+      .animate { transition: none; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <nav>
+        <div class="logo">Hassan Kazmouhi</div>
+        <ul class="nav-links">
+          <li><a href="#home" class="nav-link">Home</a></li>
+          <li><a href="#about" class="nav-link">About</a></li>
+          <li><a href="#skills" class="nav-link">Skills</a></li>
+          <li><a href="#experience" class="nav-link">Experience</a></li>
+          <li><a href="#education" class="nav-link">Education</a></li>
+          <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+        <button class="menu-btn" id="menuBtn"><i class="fa-solid fa-bars"></i></button>
+        <button class="admin-btn" id="adminToggle">Admin</button>
+      </nav>
+    </div>
+    <div class="nav-drawer" id="navDrawer">
+      <ul>
+        <li><a href="#home" class="drawer-link">Home</a></li>
+        <li><a href="#about" class="drawer-link">About</a></li>
+        <li><a href="#skills" class="drawer-link">Skills</a></li>
+        <li><a href="#experience" class="drawer-link">Experience</a></li>
+        <li><a href="#education" class="drawer-link">Education</a></li>
+        <li><a href="#contact" class="drawer-link">Contact</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main id="home-page">
+    <!-- Hero -->
+    <section class="hero" id="home">
+      <div class="container">
+        <div class="hero-content" style="text-align:center">
+          <h1>Hassan Kazmouhi</h1>
+          <h2>Technicien en développement informatique</h2>
+          <p>Technicien spécialisé avec plus de trois ans d'expérience dans l'industrie automobile : programmation, automatisation et analyse de données.</p>
+          <div style="margin-top:18px">
+            <a href="#contact" class="btn">Contact Me</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="about">
+      <div class="container">
+        <div class="section-title">
+          <h2>About Me</h2>
+          <p>Learn more about my background, skills, and professional journey</p>
+        </div>
+        <div class="about-content">
+          <div class="about-text">
+            <p>Je suis un technicien spécialisé en développement informatique et actuellement étudiant en dernière année de licence professionnelle « Modélisation Statistique – Informatique » à la Faculté des Sciences Aïn Chock de Casablanca.</p>
+            <p>Ouvert aux nouvelles opportunités me permettant d'évoluer et d'acquérir de nouvelles compétences.</p>
+            <p>Connaissances : C, C#, ADO.NET, ASP.NET, Java, Batch scripting, HTML5, CSS3, SQL, R, MATLAB, SPSS, bureautique…</p>
+            <div class="personal-info" style="margin-top:10px">
+              <p><strong>Âge :</strong> 21 ans</p>
+              <p><strong>Email :</strong> <a href="mailto:Kazmouhi.malak@gmail.com">Kazmouhi.malak@gmail.com</a></p>
+              <p><strong>Téléphone :</strong> <a href="tel:+212652571213">+212 652 57 12 13</a></p>
+              <p><strong>Adresse :</strong> 49, Pam Oulmes Khemisset</p>
+            </div>
+          </div>
+          <div class="about-image">
+            <!-- Use a reliable placeholder; replace with your photo path -->
+            <img src="https://media.licdn.com/dms/image/v2/D5603AQGxJ7FnfUIsoA/profile-displayphoto-crop_800_800/B56ZjinZZDH8AQ-/0/1756148636093?e=1760572800&v=beta&t=3r3I-jKZU96gfnREWKYhozWpj7RgjMlENBhHBR9cFa4" alt="Hassan Kazmouhi portrait" loading="lazy" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills" class="skills">
+      <div class="container">
+        <div class="section-title">
+          <h2>Skills</h2>
+          <p>My technical expertise and professional skills</p>
+        </div>
+        <div class="skills-grid">
+          <div class="skill-card animate">
+            <i class="fas fa-code"></i>
+            <h3>Programming</h3>
+            <p>C, C#, Python, SQL, .NET, Java, JavaScript, HTML, CSS</p>
+          </div>
+          <div class="skill-card animate">
+            <i class="fas fa-database"></i>
+            <h3>Data Analysis</h3>
+            <p>R, MATLAB, SPSS, data modeling, statistical analysis</p>
+          </div>
+          <div class="skill-card animate">
+            <i class="fas fa-cogs"></i>
+            <h3>Automation</h3>
+            <p>Industrial vision systems (Cognex, Keyence), Siemens TIA Portal</p>
+          </div>
+          <div class="skill-card animate">
+            <i class="fas fa-chart-line"></i>
+            <h3>Modeling</h3>
+            <p>Statistical modeling, population dynamics, demographic projections</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience -->
+    <section id="experience" class="experience">
+      <div class="container">
+        <div class="section-title">
+          <h2>Work Experience</h2>
+          <p>My professional journey and work experiences</p>
+        </div>
+        <div class="timeline">
+          <div class="timeline-item animate">
+            <div class="timeline-content">
+              <div class="timeline-date">Juin 2022 – Present</div>
+              <h3>Technicien programmeur</h3>
+              <h4>APTIV Tanger</h4>
+              <p>Programmation des machines de test électrique et systèmes d'emballage, automatisation, digitalisation et analyse de données.</p>
+            </div>
+          </div>
+          <div class="timeline-item animate">
+            <div class="timeline-content">
+              <div class="timeline-date">Avril – Octobre 2021</div>
+              <h3>Technicien programmeur</h3>
+              <h4>APTIV Kénitra</h4>
+              <p>Poste de 6 mois comme technicien en programmation dans l'industrie automobile.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Education -->
+    <section id="education" class="education">
+      <div class="container">
+        <div class="section-title">
+          <h2>Education</h2>
+          <p>My academic background and qualifications</p>
+        </div>
+        <div class="timeline">
+          <div class="timeline-item animate">
+            <div class="timeline-content">
+              <div class="timeline-date">2020 – Present</div>
+              <h3>Licence professionnelle – Modélisation statistique & informatique</h3>
+              <h4>Faculté des Sciences Aïn Chock, Casablanca</h4>
+            </div>
+          </div>
+          <div class="timeline-item animate">
+            <div class="timeline-content">
+              <div class="timeline-date">2018 – 2020</div>
+              <h3>Technicien spécialisé en développement informatique</h3>
+              <h4>ISTA Maamoura, Kénitra</h4>
+            </div>
+          </div>
+          <div class="timeline-item animate">
+            <div class="timeline-content">
+              <div class="timeline-date">Mai 2019</div>
+              <h3>Microsoft Office Specialist (MOS)</h3>
+              <h4>Word 2016, Excel 2016</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="contact">
+      <div class="container">
+        <div class="section-title">
+          <h2>Contact Me</h2>
+          <p>Get in touch with me for opportunities or collaborations</p>
+        </div>
+        <div class="contact-content">
+          <div class="contact-info">
+            <h3>Contact Information</h3>
+            <p><i class="fas fa-phone" aria-hidden="true"></i> <a href="tel:+212652571213">+212 652 57 12 13</a></p>
+            <p><i class="fas fa-envelope" aria-hidden="true"></i> <a href="mailto:Kazmouhi.malak@gmail.com">Kazmouhi.malak@gmail.com</a></p>
+            <p><i class="fas fa-map-marker-alt" aria-hidden="true"></i> 49, Pam Oulmes Khemisset</p>
+
+            <div class="social-links" aria-label="Social links">
+              <a href="https://www.linkedin.com/in/hassan-kazmouhi/" class="icon" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                <i class="fab fa-linkedin" aria-hidden="true"></i>
+              </a>
+              <a href="https://github.com/SanOuhi99" class="icon" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                <i class="fab fa-github" aria-hidden="true"></i>
+              </a>
+              <!-- Fiverr as inline SVG to avoid FA 6.x missing brand icon -->
+              <a href="https://www.fiverr.com/s/BRpZ3Bz" class="icon" target="_blank" rel="noopener noreferrer" aria-label="Fiverr">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" fill="currentColor" role="img" aria-label="Fiverr logo">
+                  <path d="M25,2C12.32,2,2,12.32,2,25s10.32,23,23,23s23-10.32,23-23S37.68,2,25,2z M34,36h-6V25h-4v11h-6V25h-4v-6h4.04 c0.37-4.96,3.54-8,8.46-8h2.53v6H26.5c-0.92,0-2.14,0-2.43,2H34V36z"></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <div class="contact-form">
+            <form id="contactForm">
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="Your Name" name="name" required />
+              </div>
+              <div class="form-group">
+                <input type="email" class="form-control" placeholder="Your Email" name="email" required />
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="Subject" name="subject" required />
+              </div>
+              <div class="form-group">
+                <textarea class="form-control" placeholder="Your Message" name="message" required></textarea>
+              </div>
+              <button type="submit" class="btn">Send Message</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Admin Panel -->
+  <div id="admin-panel" class="admin-panel" style="display:none">
+    <div class="container">
+      <div class="admin-form">
+        <div class="form-title">
+          <h2>Admin Panel</h2>
+          <p>Manage your portfolio content</p>
+        </div>
+
+        <div class="tabs">
+          <div class="tab active" data-tab="experience">Experience</div>
+          <div class="tab" data-tab="education">Education</div>
+          <div class="tab" data-tab="projects">Projects</div>
+        </div>
+
+        <div class="tab-content active" id="experience-form">
+          <form id="addExperienceForm">
+            <div class="form-group"><input type="text" class="form-control" placeholder="Job Title" required></div>
+            <div class="form-group"><input type="text" class="form-control" placeholder="Company" required></div>
+            <div class="form-group"><input type="text" class="form-control" placeholder="Duration (e.g., Jan 2020 - Present)" required></div>
+            <div class="form-group"><textarea class="form-control" placeholder="Description" required></textarea></div>
+            <button type="submit" class="btn">Add Experience</button>
+          </form>
+        </div>
+
+        <div class="tab-content" id="education-form">
+          <form id="addEducationForm">
+            <div class="form-group"><input type="text" class="form-control" placeholder="Degree" required></div>
+            <div class="form-group"><input type="text" class="form-control" placeholder="Institution" required></div>
+            <div class="form-group"><input type="text" class="form-control" placeholder="Duration (e.g., 2018 - 2020)" required></div>
+            <div class="form-group"><textarea class="form-control" placeholder="Description"></textarea></div>
+            <button type="submit" class="btn">Add Education</button>
+          </form>
+        </div>
+
+        <div class="tab-content" id="projects-form">
+          <form id="addProjectForm">
+            <div class="form-group"><input type="text" class="form-control" placeholder="Project Name" required></div>
+            <div class="form-group"><input type="text" class="form-control" placeholder="Technologies Used" required></div>
+            <div class="form-group"><input type="url" class="form-control" placeholder="Project URL"></div>
+            <div class="form-group"><textarea class="form-control" placeholder="Description" required></textarea></div>
+            <button type="submit" class="btn">Add Project</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Hassan Kazmouhi</h3>
+          <p>Technicien en développement informatique spécialisé dans la programmation, l'automatisation et l'analyse de données.</p>
+        </div>
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <ul style="list-style:none; padding:0">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#experience">Experience</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3>Contact</h3>
+          <p><a href="tel:+212652571213" style="color:#fff">+212 652 57 12 13</a></p>
+          <p><a href="mailto:Kazmouhi.malak@gmail.com" style="color:#fff">Kazmouhi.malak@gmail.com</a></p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; <span id="year"></span> Hassan Kazmouhi. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Year in footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Toggle Admin Panel
+    const adminBtn = document.getElementById('adminToggle');
+    const adminPanel = document.getElementById('admin-panel');
+    const homePage = document.getElementById('home-page');
+    adminBtn.addEventListener('click', () => {
+      const showing = adminPanel.style.display === 'block';
+      adminPanel.style.display = showing ? 'none' : 'block';
+      homePage.style.display = showing ? 'block' : 'none';
+    });
+
+    // Mobile nav drawer
+    const menuBtn = document.getElementById('menuBtn');
+    const navDrawer = document.getElementById('navDrawer');
+    const closeDrawer = () => navDrawer.classList.remove('open');
+    if (menuBtn) menuBtn.addEventListener('click', () => navDrawer.classList.toggle('open'));
+    document.querySelectorAll('.drawer-link').forEach(a => a.addEventListener('click', closeDrawer));
+
+    // Highlight current nav link on scroll
+    const links = document.querySelectorAll('.nav-link');
+    const sections = Array.from(links).map(l => document.querySelector(l.getAttribute('href')));
+    const onScroll = () => {
+      const pos = window.scrollY + 110; // offset for fixed header
+      sections.forEach((sec, i) => {
+        if (!sec) return;
+        const top = sec.offsetTop, bottom = top + sec.offsetHeight;
+        links[i].classList.toggle('active', pos >= top && pos < bottom);
+      });
+    };
+    window.addEventListener('scroll', onScroll); onScroll();
+
+    // Tabs in Admin Panel
+    const tabs = document.querySelectorAll('.tab');
+    tabs.forEach(tab => tab.addEventListener('click', function() {
+      tabs.forEach(t => t.classList.remove('active'));
+      this.classList.add('active');
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+      const tabId = this.getAttribute('data-tab');
+      document.getElementById(`${tabId}-form`).classList.add('active');
+    }));
+
+    // Animate on scroll
+    const animateEls = document.querySelectorAll('.animate');
+    const checkScroll = () => {
+      const screen = window.innerHeight * 0.85;
+      animateEls.forEach(el => {
+        const top = el.getBoundingClientRect().top;
+        if (top < screen) el.classList.add('animated');
+      });
+    };
+    window.addEventListener('scroll', checkScroll);
+    window.addEventListener('load', checkScroll);
+
+    // Demo forms
+    document.getElementById('addExperienceForm').addEventListener('submit', e => { e.preventDefault(); alert('Experience added successfully!'); e.target.reset(); });
+    document.getElementById('addEducationForm').addEventListener('submit', e => { e.preventDefault(); alert('Education added successfully!'); e.target.reset(); });
+    document.getElementById('addProjectForm').addEventListener('submit', e => { e.preventDefault(); alert('Project added successfully!'); e.target.reset(); });
+    document.getElementById('contactForm').addEventListener('submit', e => { e.preventDefault(); alert('Message sent successfully!'); e.target.reset(); });
+  </script>
+</body>
+</html>
