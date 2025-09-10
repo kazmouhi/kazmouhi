@@ -41,7 +41,7 @@ export default function HeroSection() {
           <div className="relative mx-auto w-32 h-32 sm:w-40 sm:h-40">
             <div className="absolute inset-0 rounded-full bg-gradient-to-r from-primary to-accent animate-pulse-ring" />
             <img 
-              src="/dist/public/images/profile.jpg" 
+              src="@assets/20230917_192826.jpg" 
               alt="Hassan Kazmouhi" 
               className="relative z-10 w-full h-full rounded-full object-cover border-4 border-background shadow-xl"
             />
