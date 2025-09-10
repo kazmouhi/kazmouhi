@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Mail, Phone, Linkedin } from "lucide-react";
 import { useLanguage } from "@/components/language-provider";
 import { downloadCV } from "@/lib/cv-download";
+import profileImage from "@/images/profile.jpg";
 
 export default function HeroSection() {
   const { t } = useLanguage();
@@ -41,7 +42,7 @@ export default function HeroSection() {
           <div className="relative mx-auto w-32 h-32 sm:w-40 sm:h-40">
             <div className="absolute inset-0 rounded-full bg-gradient-to-r from-primary to-accent animate-pulse-ring" />
             <img 
-              src="@/images/profile.jpg" 
+              src={profileImage} 
               alt="Hassan Kazmouhi" 
               className="relative z-10 w-full h-full rounded-full object-cover border-4 border-background shadow-xl"
             />
